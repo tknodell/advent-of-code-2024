@@ -1,7 +1,7 @@
 left_numbers_array = []
 right_numbers_array = []
 
-with open('example', 'r') as file:
+with open('input', 'r') as file:
     for line in file:
         line = line.strip()
         parts = line.split('   ')
@@ -14,5 +14,16 @@ with open('example', 'r') as file:
 left_numbers_array = sorted(left_numbers_array)
 right_numbers_array = sorted(right_numbers_array)
 
-print(left_numbers_array)
-print(right_numbers_array)
+# print(left_numbers_array)
+# print(right_numbers_array)
+
+i=0
+sum=0
+while i < len(left_numbers_array):
+    if right_numbers_array[i] > left_numbers_array[i]:
+        sum += right_numbers_array[i]-left_numbers_array[i]
+    else:
+        sum += left_numbers_array[i]-right_numbers_array[i]
+    i=i+1
+
+print(sum)
