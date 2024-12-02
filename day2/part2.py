@@ -5,9 +5,9 @@ def increasing_decreasing(nums):
     increasing = decreasing = True
 
     for i in range(1, len(nums)):
-        if int(nums[i]) < int(nums[i - 1]):
+        if nums[i] < nums[i - 1]:
             increasing = False
-        if int(nums[i]) > int(nums[i - 1]):
+        if nums[i] > nums[i - 1]:
             decreasing = False
 
     return increasing or decreasing
@@ -15,7 +15,7 @@ def increasing_decreasing(nums):
 
 def diffIsSafe(arr):
     for i in range(1, len(arr)):
-        diff = abs(int(arr[i]) - int(arr[i - 1]))
+        diff = abs(arr[i] - arr[i - 1])
         if diff > 3 or diff < 1:
             return False
 
@@ -25,6 +25,7 @@ with open('input', 'r') as file:
     for line in file:
         line = line.strip()
         parts = line.split(' ')
+        parts = list(map(int, parts))
 
         safe = True
 
