@@ -1,26 +1,25 @@
 
 numSafe = 0
 
-def IncreaseAndDecrease(arr):
-    increasing = all(int(arr[i]) <= int(arr[i + 1]) for i in range(len(arr) - 1))
-    decreasing = all(int(arr[i]) >= int(arr[i + 1]) for i in range(len(arr) - 1))
+def increasing_decreasing(nums):
+    increasing = decreasing = True
 
-    # print(arr)
-    # print(increasing, decreasing)
-    if not increasing and not decreasing:
-        return True
-    else:
-        return False
+    for i in range(1, len(nums)):
+        if int(nums[i]) < int(nums[i - 1]):
+            increasing = False
+        if int(nums[i]) > int(nums[i - 1]):
+            decreasing = False
+
+    return increasing or decreasing
+
 
 def diffIsSafe(arr):
     for i in range(len(arr)-1):
         diff = abs(int(arr[i+1]) - int(arr[i]))
-        # print(diff)
         if diff > 3 or diff < 1:
-            # print("not safe")
             return False
-        else:
-            return True
+
+    return True
 
 with open('example', 'r') as file:
     for line in file:
@@ -29,7 +28,8 @@ with open('example', 'r') as file:
 
         safe = True
 
-        if IncreaseAndDecrease(parts):
+        print("Checking", parts)
+        if increasing_decreasing(parts) is False:
             safe = False
             print ("not safe increasing and decreasing")
             # print(parts)
@@ -38,15 +38,15 @@ with open('example', 'r') as file:
             safe = False
             print ("not safe diff is too high")
 
-        if not safe:
-            print("origial one not safe")
+        if safe is False:
+            print("original one not safe")
             print(parts)
             for i in range(len(parts)-1):
                 missingOne = parts.copy()
                 missingOne.pop(i)
 
-                print(missingOne, IncreaseAndDecrease(missingOne), diffIsSafe(missingOne))
-                if IncreaseAndDecrease(missingOne) and diffIsSafe(missingOne):
+                print(missingOne, increasing_decreasing(missingOne), diffIsSafe(missingOne))
+                if increasing_decreasing(missingOne) and diffIsSafe(missingOne):
                     safe = True
                     print ("now safe not increasing and decreasing and diff is good")
                     break
@@ -54,6 +54,11 @@ with open('example', 'r') as file:
                 missingOne = parts.copy
 
         if safe:
+            print(parts, " is safe")
+            print()
             numSafe = numSafe + 1
-        print("---")
-        print(numSafe)
+        else:
+            print(parts, " is not safe")
+            print()
+    print("---")
+    print(numSafe)
