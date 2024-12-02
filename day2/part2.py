@@ -9,6 +9,8 @@ def IncreaseAndDecrease(arr):
     # print(increasing, decreasing)
     if not increasing and not decreasing:
         return True
+    else:
+        return False
 
 def diffIsSafe(arr):
     for i in range(len(arr)-1):
@@ -17,7 +19,8 @@ def diffIsSafe(arr):
         if diff > 3 or diff < 1:
             # print("not safe")
             return False
-
+        else:
+            return True
 
 with open('example', 'r') as file:
     for line in file:
@@ -42,7 +45,8 @@ with open('example', 'r') as file:
                 missingOne = parts.copy()
                 missingOne.pop(i)
 
-                if not IncreaseAndDecrease(missingOne) and diffIsSafe(missingOne):
+                print(missingOne, IncreaseAndDecrease(missingOne), diffIsSafe(missingOne))
+                if IncreaseAndDecrease(missingOne) and diffIsSafe(missingOne):
                     safe = True
                     print ("now safe not increasing and decreasing and diff is good")
                     break
