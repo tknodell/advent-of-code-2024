@@ -2,12 +2,12 @@
 numSafe = 0
 
 def IncreaseAndDecrease(arr):
-    increasing = all(arr[i] < arr[i + 1] for i in range(len(arr) - 1))
-    decreasing = all(arr[i] > arr[i + 1] for i in range(len(arr) - 1))
+    increasing = all(int(arr[i]) <= int(arr[i + 1]) for i in range(len(arr) - 1))
+    decreasing = all(int(arr[i]) >= int(arr[i + 1]) for i in range(len(arr) - 1))
 
     print(arr)
     print(increasing, decreasing)
-    if increasing and decreasing:
+    if not increasing and not decreasing:
         return True
 
 with open('input', 'r') as file:
