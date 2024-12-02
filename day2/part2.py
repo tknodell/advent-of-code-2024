@@ -14,14 +14,14 @@ def increasing_decreasing(nums):
 
 
 def diffIsSafe(arr):
-    for i in range(len(arr)-1):
-        diff = abs(int(arr[i+1]) - int(arr[i]))
+    for i in range(1, len(arr)):
+        diff = abs(int(arr[i]) - int(arr[i - 1]))
         if diff > 3 or diff < 1:
             return False
 
     return True
 
-with open('example', 'r') as file:
+with open('input', 'r') as file:
     for line in file:
         line = line.strip()
         parts = line.split(' ')
@@ -41,7 +41,7 @@ with open('example', 'r') as file:
         if safe is False:
             print("original one not safe")
             print(parts)
-            for i in range(len(parts)-1):
+            for i in range(0, len(parts)):
                 missingOne = parts.copy()
                 missingOne.pop(i)
 
@@ -50,8 +50,6 @@ with open('example', 'r') as file:
                     safe = True
                     print ("now safe not increasing and decreasing and diff is good")
                     break
-
-                missingOne = parts.copy
 
         if safe:
             print(parts, " is safe")
