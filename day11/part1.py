@@ -21,20 +21,20 @@ with open('example', 'r') as file:
 
     print(stones)
 
-    for index in range(len(stones)):
-        print("Checking ", stones[index])
-        if stones[index] == 0:
+    originalStones = stones.copy()
+
+    for index, stone in enumerate(originalStones):
+        print("Checking ", stone)
+        if stone == 0:
             stones[index] = 1
             print("Change to 1")
-        elif evenNumDigits(stones[index]):
-            res_first, res_second = split_digits(stones[index])
+        elif evenNumDigits(stone):
+            res_first, res_second = split_digits(stone)
 
-            stones.insert(index-1,int(res_first))
-            stones.insert(index+1,int(res_second))
-            stones.pop(index)
+            stones[index:index+1] = [res_first,res_second]
             print("Insert two new stones", res_first, res_second)
         else:
-            stones[index] = stones[index] * 2024
+            stones[index] = (stone * 2024)
             print("Multiply by 2024")
         print(stones)
         print()
