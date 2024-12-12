@@ -13,33 +13,26 @@ def split_digits(number):
 
     return first_half, second_half
 
-with open('example', 'r') as file:
-    for line in file:
-        line = line.strip()
-        stones = line.split(' ')
-        stones = list(map(int, stones))
-
-    print(stones)
-
-    originalStones = stones.copy()
-
-    for index, stone in enumerate(originalStones):
-        print("Checking ", stone)
+def blink(stones):
+    updatedStones = []
+    for stone in stones:
         if stone == 0:
-            stones[index] = 1
-            print("Change to 1")
+            updatedStones.append(1)
         elif evenNumDigits(stone):
             res_first, res_second = split_digits(stone)
-
-            stones[index:index+1] = [res_first,res_second]
-            print("Insert two new stones", res_first, res_second)
+            updatedStones.append(res_first)
+            updatedStones.append(res_second)
         else:
-            stones[index] = (stone * 2024)
-            print("Multiply by 2024")
-        print(stones)
-        print()
+            updatedStones.append(stone * 2024)
+    return updatedStones
 
 
-    print(stones)
-    # for i in range(1,6):
-    #     print(i)
+with open('example', 'r') as file:
+    input = file.read()
+
+stones = [int(n) for n in input.split()]
+
+print(stones)
+
+for i in range(1,6):
+    print(blink(stones))
