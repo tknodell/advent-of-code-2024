@@ -19,17 +19,18 @@ def blink(stones):
     return updatedStones
 
 
-with open('example', 'r') as file:
+with open('input', 'r') as file:
     input = file.read()
 
 stones = [int(n) for n in input.split()]
 
-print(stones)
+# print(stones)
 
-print(blink(stones))
+# print(blink(stones))
 
-for i in range(6):
+for i in range(75):
     stones = blink(stones)
-    print(stones)
+    print(i)
+    # print(stones)
 
-# # print(stones)
+print(len(stones))
