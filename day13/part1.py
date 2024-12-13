@@ -1,4 +1,5 @@
 import numpy as np
+import re
 
 def parse_line(line):
     #Button A: X+62, Y+27
@@ -25,13 +26,21 @@ def calcTokens(arr):
     isValid = res[0].is_integer() and res[1].is_integer()
     if isValid:
         tokenA = res[0] * 3
-        tokenB = res[0]
+        tokenB = res[1]
         return tokenA + tokenB
     else:
         return 0
 
-print(calcTokens([94,34,22,67,8400,5400]))
-print(calcTokens([26,66,67,21,12748,12176]))
+totalTokens = 0
+with open('input') as file:
+    D = file.read()
+    lines = D.split("\n\n")
 
-# with open('example') as file:
-#     D = file.read()
+    for line in lines:
+        res = re.findall(r'\d+',line)
+        numTokens = calcTokens([int(res[0]),int(res[1]),int(res[2]),int(res[3]),int(res[4]),int(res[5])])
+        print(numTokens)
+        totalTokens += numTokens
+
+    print("---")
+    print(totalTokens)
