@@ -1,36 +1,31 @@
+import numpy as np
 
 
-def optimize(aX, aY, bX, bY, targetX, targetY):
-    pressA, pressB, = 0,0
+def solveLinearMatrix(aX, aY, bX, bY, prizeX, prizeY):
+    A = np.array([[aX, bX], [aY, bY]])
+    B = np.array([prizeX, prizeY])
 
-    while True:
-        current_x = pressA * aX + pressB * bX
-        current_y = pressA * aY + pressB * bY
+    # calulate inverse
+    invA = np.linalg.inv(A)
 
-        if current_x == targetX and current_y == targetY:
-            return pressA, pressB
+    return invA @ B
 
-        if current_x < targetX:
-            pressA += 1
-        if current_x > targetX:
-            pressB += 1
-        if current_y < targetY:
-            pressA += 1
-        if current_y > targetY:
-            pressB += 1
+    # OR you can do
+    # return np.dot(invA, B)
+    # return np.linalg.solve(A,B)
 
-print(optimize(94,34,22,67,8400,5400))
+def calcTokens():
+    # res = print(solveLinearMatrix(26,66,67,21,12748,12176))
+    res = solveLinearMatrix(94,34,22,67,8400,5400)
+    res = np.ndarray.round(res)
 
 
-# with open('example', 'r') as file:
-#     for line in file:
-#         print(line)
-#         parts = line.split(':')
+    isValid = res[0].is_integer() and res[1].is_integer()
+    if isValid:
+        tokenA = res[0] * 3
+        tokenB = res[0]
+        return tokenA + tokenB
+    else:
+        return 0
 
-
-#         print(parts[0])
-
-
-# Button A: X+94, Y+34
-# Button B: X+22, Y+67
-# Prize: X=8400, Y=5400
+print(calcTokens)
