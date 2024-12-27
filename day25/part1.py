@@ -1,11 +1,10 @@
-foo = open('example').read().split('\n\n')
-for bar in enumerate(foo):
-    print(bar)
-
-print("---")
-
 items = [{i for i, c in enumerate(item) if c == '#'}
     for item in open('example').read().split('\n\n')]
+
+for item in items:
+    print(item)
+
+print("---")
 
 # 3. Calculating the Number of Non-Overlapping Pairs:
 
@@ -25,7 +24,7 @@ count = 0
 for k in items:
     # Iterate through each item in the 'items' list again
     for l in items:
-        print(k,l)
+        # print(k,l)
         # Check if the bitwise AND of k and l is zero
         # (meaning they have no common set bits)
         if not (k & l):
